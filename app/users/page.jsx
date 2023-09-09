@@ -43,7 +43,7 @@ export default function UsersHome() {
         <h1 className="h1">Users</h1>
         <button onClick={handleAddUserButton}>
           <Image
-            src={"/plus.svg"}
+            src={"./plus.svg"}
             alt="plus"
             width={32}
             height={32}
@@ -78,7 +78,7 @@ export default function UsersHome() {
                       <Image
                         width={16}
                         height={16}
-                        src={"/trash.svg"}
+                        src={"./trash.svg"}
                         alt={"trash"}
                       />
                     </button>
@@ -91,7 +91,7 @@ export default function UsersHome() {
                       <Image
                         width={16}
                         height={16}
-                        src={"/pen.svg"}
+                        src={"./pen.svg"}
                         alt={"edit"}
                       />
                     </button>
