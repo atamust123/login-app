@@ -1,18 +1,21 @@
 import { NextResponse } from "next/server";
+import { withAuth } from "next-auth/middleware";
 
-export function middleware(request) {
+export default withAuth(function middleware(request) {
   const path = request.nextUrl.pathname;
 
-  const isPublicPath = path === "/login";
-  const token = request.cookie.get("token")?.value || "";
+  const isPublicPath = path === "/";
+  const token = request?.cookie?.get("token")?.value || "";
+
+  console.log("PATHHHHHHHHHHHHHHH", path);
 
   if (isPublicPath && token) {
     return NextResponse.redirect(new URL("/home", request.nextUrl));
   } else if (!isPublicPath && !token) {
-    return NextResponse.redirect(new URL("/login", request.nextUrl));
+    return NextResponse.redirect(new URL("/", request.nextUrl));
   }
-}
+});
 
 export const config = {
-  matcher: ["/", "/login", "/home", "/users/:path*"],
+  matcher: ["/", "/home", "/users/:path*"],
 };

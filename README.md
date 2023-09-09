@@ -4,3 +4,6 @@ Prisma is used to create model for mongodb
 Next-auth latest is used because needs to support app directory
 Password is hashed with bcrpyt and stored in db
 
+How to Login:
+    username:admin
+    password:123
