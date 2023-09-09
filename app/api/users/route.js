@@ -1,0 +1,98 @@
+import { connect } from "@/app/dbConfig/dbConfig";
+import User from "@/app/libs/userModel";
+import { NextResponse } from "next/server";
+import bcrypt from "bcrypt";
+
+connect();
+
+export async function GET(request) {
+  try {
+    const users = await User.find().select("-password");
+    return NextResponse.json({
+      message: "Users fetched",
+      data: users,
+    });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+}
+
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    const { name, isAdmin, password } = body;
+    console.log("Add user request body:", body);
+
+    const user = await User.findOne({ name });
+
+    if (user) {
+      return NextResponse.json(
+        { error: "User already exist" },
+        { status: 400 }
+      );
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const newUser = new User({
+      name,
+      password: hashedPassword,
+      isAdmin,
+    });
+    const savedUser = await newUser.save();
+    console.log(savedUser);
+
+    return NextResponse.json({
+      message: "User created successfully",
+      success: true,
+      savedUser,
+    });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
+export async function PUT(request) {
+  try {
+    const body = await request.json();
+    const { userId, newName } = body;
+    console.log("body is fetched", body);
+    const user = await User.findOneAndUpdate(
+      { _id: userId },
+      { $set: { name: newName } },
+      { returnNewDocument: true }
+    );
+    return NextResponse.json({
+      message: "User updated",
+      success: true,
+      updatedUser: user,
+    });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+}
+
+export async function DELETE(request) {
+  try {
+    const body = await request.json();
+    const { userId } = body;
+    console.log("body is fetched", body);
+
+    const user = await User.findOneAndDelete({ _id: userId });
+    if (!user) {
+      return NextResponse.json(
+        { error: "User does not exist" },
+        { status: 400 }
+      );
+    }
+    console.log("User deleted", user);
+    return NextResponse.json({
+      message: "User deleted successfully",
+      success: true,
+      deletedUser: user,
+    });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+}
