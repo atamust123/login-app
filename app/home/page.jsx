@@ -27,7 +27,7 @@ export default function Home() {
         <div className="flex-1">
           <h1 className="h1">Device Type</h1>
           <Image
-            src={"./chart2.png"}
+            src={"/chart2.png"}
             alt={"Device Type"}
             width={256}
             height={256}
@@ -37,7 +37,7 @@ export default function Home() {
         <div className="flex-1">
           <h1 className="h1">Daily Downloads</h1>
           <Image
-            src={"./chart.png"}
+            src={"/chart.png"}
             alt={"Chart"}
             width={512}
             height={408}

@@ -94,7 +94,7 @@ export const UserModal = ({ mode, defaultValues, open, onHide }) => {
           onClick={onHide}
           type="button"
         >
-          <Image src={"./x.svg"} alt="close" width={16} height={16} />
+          <Image src={"/x.svg"} alt="close" width={16} height={16} />
         </button>
         <h1 className="h1 mb-12 text-left">
           {mode === "edit" ? "Edit User" : "Add User"}

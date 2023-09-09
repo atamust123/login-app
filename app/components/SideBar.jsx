@@ -26,7 +26,7 @@ export default function SideBar({ children }) {
       <div className="sidebar">
         <div>
           <Image
-            src={"./logo.jpg"}
+            src={"/logo.jpg"}
             width={48}
             height={48}
             className="rounded-lg"
@@ -37,19 +37,19 @@ export default function SideBar({ children }) {
           className="cursor-pointer  hover:list-item"
           onClick={() => router.push("/home")}
         >
-          <Image src={"./house.svg"} width={32} height={32} alt="house" />
+          <Image src={"/house.svg"} width={32} height={32} alt="house" />
         </div>
         <div
           className="cursor-pointer  hover:list-item"
           onClick={() => router.push("/users")}
         >
-          <Image src={"./user.svg"} width={32} height={32} alt="user" />
+          <Image src={"/user.svg"} width={32} height={32} alt="user" />
         </div>
         <div
           className="cursor-pointer  hover:list-item signout"
           onClick={onLogOut}
         >
-          <Image src={"./signout.svg"} width={48} height={48} alt="signout" />
+          <Image src={"/signout.svg"} width={48} height={48} alt="signout" />
         </div>
       </div>
       <main className="pl-20 h-screen">{children}</main>
