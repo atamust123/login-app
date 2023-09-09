@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -8,13 +9,17 @@ export default function useUsers(setDeleteModal, setAddEditModal) {
   const [currentUser, setCurrentUser] = useState();
   const [actionUser, setActionUser] = useState(null);
   const [users, setUsers] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     axios
       .get("/api/users/me")
       .then((res) => setCurrentUser(res.data.data))
-      .catch("Unable to fetch current user");
-  }, []);
+      .catch((err) => {
+        toast.error("Unable to fetch current user");
+        router.push("/");
+      });
+  }, [router]);
 
   useEffect(() => {
     getUserList();

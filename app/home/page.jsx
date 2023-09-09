@@ -4,14 +4,18 @@ import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 export default function Home() {
   const [user, setUser] = useState(undefined);
-
+  const router = useRouter();
   useEffect(() => {
     axios
       .get("/api/users/me")
       .then((res) => setUser(res.data.data))
-      .catch((err) => toast.error("User could not fetch"));
+      .catch((err) => {
+        toast.error("User could not fetch");
+        router.push("/");
+      });
   }, []);
 
   return (
@@ -34,7 +38,7 @@ export default function Home() {
           <h1 className="h1">Daily Downloads</h1>
           <Image
             src={"/chart.png"}
-            alt={"Device Type"}
+            alt={"Chart"}
             width={512}
             height={408}
             className="mt-12"
