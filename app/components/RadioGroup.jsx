@@ -1,7 +1,6 @@
 "use client";
 
 import { Controller, useFormContext } from "react-hook-form";
-import { RadioButton } from "./RadioButton";
 
 export const RadioGroup = ({ options, name, rest, label }) => {
   const { control } = useFormContext();
