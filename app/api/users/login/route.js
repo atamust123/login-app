@@ -6,6 +6,30 @@ import { NextResponse } from "next/server";
 
 connect();
 
+/**
+ * @swagger
+ * /api/users/login:
+ *   post:
+ *     description: Login action
+ *     requestBody:
+ *      content:
+ *       application/json:
+ *        schema:
+ *          type: object
+ *          required:
+ *            - name
+ *            - password
+ *          properties:
+ *            name:
+ *              type: string
+ *              example: "Ali"
+ *            password:
+ *              type: string
+ *              example: "12345678"
+ *     responses:
+ *       200:
+ *         description: Hello World!
+ */
 export async function POST(request) {
   try {
     const reqBody = await request.json();

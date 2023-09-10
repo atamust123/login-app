@@ -5,6 +5,15 @@ import bcrypt from "bcrypt";
 
 connect();
 
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     description: Returns the user list
+ *     responses:
+ *       200:
+ *         description: Hello World!
+ */
 export async function GET(request) {
   try {
     const users = await User.find().select("-password");
@@ -17,6 +26,34 @@ export async function GET(request) {
   }
 }
 
+/**
+ * @swagger
+ * /api/users:
+ *   post:
+ *     description: add new user
+ *     requestBody:
+ *      content:
+ *       application/json:
+ *        schema:
+ *          type: object
+ *          required:
+ *            - isAdmin
+ *            - name
+ *            - password
+ *          properties:
+ *            isAdmin:
+ *              type: bool
+ *              example: false
+ *            name:
+ *              type: string
+ *              example: "Ali"
+ *            password:
+ *              type: string
+ *              example: "12345678"
+ *     responses:
+ *       200:
+ *         description: new user!
+ */
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -53,6 +90,30 @@ export async function POST(request) {
   }
 }
 
+/**
+ * @swagger
+ * /api/users:
+ *   put:
+ *     description: Update single user name
+ *     requestBody:
+ *      content:
+ *       application/json:
+ *        schema:
+ *          type: object
+ *          required:
+ *            - userId
+ *            - newName
+ *          properties:
+ *            userId:
+ *              type: string
+ *              example: "userId"
+ *            newName:
+ *              type: string
+ *              example: "Ali"
+ *     responses:
+ *       200:
+ *         description: Returns new user name!
+ */
 export async function PUT(request) {
   try {
     const body = await request.json();
@@ -72,7 +133,26 @@ export async function PUT(request) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }
-
+/**
+ * @swagger
+ * /api/users:
+ *   delete:
+ *     description: Delete single user name
+ *     requestBody:
+ *      content:
+ *       application/json:
+ *        schema:
+ *          type: object
+ *          required:
+ *            - userId
+ *          properties:
+ *            userId:
+ *              type: string
+ *              example: "userId"
+ *     responses:
+ *       200:
+ *         description: Deleted user name!
+ */
 export async function DELETE(request) {
   try {
     const body = await request.json();

@@ -22,6 +22,8 @@ export const RadioGroup = ({ options, name, rest, label }) => {
                     checked={field.value === opt.id}
                     onChange={field.onChange}
                     className="w-4"
+                    disabled={rest.disabled}
+                    {...rest}
                   />
                   <label
                     htmlFor={opt.id}

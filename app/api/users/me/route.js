@@ -5,6 +5,15 @@ import { NextResponse } from "next/server";
 
 connect();
 
+/**
+ * @swagger
+ * /api/users/me:
+ *   get:
+ *     description: If user logged in, get the current user and sets the token
+ *     responses:
+ *       200:
+ *         description: Hello World!
+ */
 export async function GET(request) {
   try {
     const userId = await getDataFromToken(request);

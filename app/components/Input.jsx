@@ -4,7 +4,9 @@ export default function Input({ label, disabled, inputProps, name }) {
   const { control } = useFormContext();
   return (
     <>
-      <label className="label-1 mb-3">{label}</label>
+      <label className={`label-1 mb-3 ${inputProps?.disabled && "opacity-60"}`}>
+        {label}
+      </label>
       <Controller
         control={control}
         name={name}
